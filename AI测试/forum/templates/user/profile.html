@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}{{ profile_user.username }} 的主页{% endblock %}
+
+{% block content %}
+<!-- 用户信息卡片 -->
+<div class="card shadow-sm border-0 mb-4">
+  <div class="card-body p-4">
+    <div class="d-flex align-items-center gap-4">
+      <div class="avatar-xl flex-shrink-0">{{ profile_user.username[0].upper() }}</div>
+      <div class="flex-grow-1">
+        <h4 class="mb-1 fw-bold">{{ profile_user.username }}
+          {% if profile_user.is_admin %}<span class="badge bg-danger ms-2">管理员</span>{% endif %}
+          {% if profile_user.is_banned %}<span class="badge bg-secondary ms-2">已封禁</span>{% endif %}
+        </h4>
+        <p class="text-muted mb-2">{{ profile_user.bio or '这个人比较神秘，什么都没留下～' }}</p>
+        <small class="text-muted"><i class="bi bi-calendar me-1"></i>注册于 {{ profile_user.created_at.strftime('%Y-%m-%d') }}</small>
+      </div>
+      {% if current_user.is_authenticated and current_user.id != profile_user.id %}
+      <div>
+        <a href="{{ url_for('message_thread', user_id=profile_user.id) }}" class="btn btn-outline-primary rounded-pill">
+          <i class="bi bi-envelope me-1"></i>发私信
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- 最近帖子 -->
+<div class="card shadow-sm border-0 mb-4">
+  <div class="card-header fw-bold border-0" style="background:#f8f6ff;">
+    <i class="bi bi-file-text me-2"></i>最近发帖（公开）
+  </div>
+  {% if posts %}
+  <div class="list-group list-group-flush">
+    {% for post in posts %}
+    <a href="{{ url_for('post_detail', post_id=post.id) }}" class="list-group-item list-group-item-action">
+      <div class="d-flex justify-content-between">
+        <span class="text-truncate me-3">{{ post.title }}</span>
+        <small class="text-muted flex-shrink-0">{{ post.created_at.strftime('%m-%d') }}</small>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card-body text-muted text-center py-4">
+    <i class="bi bi-inbox me-2"></i>还没有公开帖子
+  </div>
+  {% endif %}
+</div>
+
+<!-- 最近回复 -->
+<div class="card shadow-sm border-0">
+  <div class="card-header fw-bold border-0" style="background:#f8f6ff;">
+    <i class="bi bi-chat-left me-2"></i>最近回复（公开）
+  </div>
+  {% if replies %}
+  <div class="list-group list-group-flush">
+    {% for reply in replies %}
+    <a href="{{ url_for('post_detail', post_id=reply.post_id) }}#reply-{{ reply.id }}" class="list-group-item list-group-item-action">
+      <div class="d-flex justify-content-between">
+        <span class="text-truncate me-3 text-muted small">{{ reply.content[:80] }}{% if reply.content|length > 80 %}...{% endif %}</span>
+        <small class="text-muted flex-shrink-0">{{ reply.created_at.strftime('%m-%d') }}</small>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card-body text-muted text-center py-4">
+    <i class="bi bi-inbox me-2"></i>还没有公开回复
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

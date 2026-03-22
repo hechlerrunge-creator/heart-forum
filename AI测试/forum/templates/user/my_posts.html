@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}我的帖子{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h5 class="fw-bold mb-0"><i class="bi bi-file-text me-2"></i>我的帖子</h5>
+  <a href="{{ url_for('new_post') }}" class="btn btn-primary btn-sm">
+    <i class="bi bi-plus me-1"></i>发新帖
+  </a>
+</div>
+
+{% if posts.items %}
+<div class="card shadow-sm">
+  <div class="list-group list-group-flush">
+    {% for post in posts.items %}
+    <div class="list-group-item px-4 py-3">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="flex-grow-1 min-w-0">
+          <a href="{{ url_for('post_detail', post_id=post.id) }}" class="fw-semibold text-dark text-decoration-none">
+            {% if post.is_pinned %}<span class="badge bg-warning text-dark me-1">置顶</span>{% endif %}
+            {% if post.is_locked %}<span class="badge bg-secondary me-1">锁定</span>{% endif %}
+            {{ post.title }}
+          </a>
+          <div class="text-muted small mt-1">
+            <span class="me-3"><i class="bi bi-folder me-1"></i>{{ post.category.name }}</span>
+            <span class="me-3"><i class="bi bi-clock me-1"></i>{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+            <span class="me-3"><i class="bi bi-eye me-1"></i>{{ post.views }}</span>
+            <span class="me-3"><i class="bi bi-chat me-1"></i>{{ post.reply_count }}</span>
+            <span class="me-3 text-danger"><i class="bi bi-emoji-heart-eyes me-1"></i>{{ post.hug_count }}</span>
+            {% if post.is_anonymous %}<span class="badge bg-light text-muted border" style="font-size:0.65rem;"><i class="bi bi-incognito"></i> 匿名</span>{% endif %}
+          </div>
+        </div>
+        <div class="btn-group btn-group-sm ms-3">
+          <a href="{{ url_for('edit_post', post_id=post.id) }}" class="btn btn-outline-secondary">
+            <i class="bi bi-pencil"></i>
+          </a>
+          <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post" onsubmit="return confirm('确认删除？')">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% if posts.pages > 1 %}
+<nav class="mt-4">
+  <ul class="pagination justify-content-center">
+    {% for p in posts.iter_pages() %}
+      {% if p %}
+        <li class="page-item {% if p == posts.page %}active{% endif %}">
+          <a class="page-link" href="{{ url_for('user_posts', page=p) }}">{{ p }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
+{% else %}
+<div class="text-center py-5 text-muted">
+  <i class="bi bi-inbox display-4"></i>
+  <p class="mt-3">你还没有发过帖子，<a href="{{ url_for('new_post') }}">发第一个</a>吧！</p>
+</div>
+{% endif %}
+{% endblock %}

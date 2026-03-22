@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}与 {{ other.username }} 的对话{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center mb-3 gap-3">
+  <a href="{{ url_for('messages') }}" class="btn btn-sm btn-outline-secondary rounded-pill">
+    <i class="bi bi-arrow-left me-1"></i>返回
+  </a>
+  <div class="avatar-circle flex-shrink-0">{{ other.username[0].upper() }}</div>
+  <div>
+    <h6 class="mb-0 fw-bold">{{ other.username }}</h6>
+    <small class="text-muted">
+      <a href="{{ url_for('user_profile', user_id=other.id) }}" class="text-decoration-none text-muted">查看主页</a>
+    </small>
+  </div>
+</div>
+
+<!-- 消息列表 -->
+<div class="card shadow-sm border-0 mb-3">
+  <div class="card-body p-3" id="msgContainer" style="max-height:500px;overflow-y:auto;">
+    {% if msgs %}
+    {% for msg in msgs %}
+    <div class="d-flex mb-3 {% if msg.sender_id == current_user.id %}justify-content-end{% endif %}">
+      {% if msg.sender_id != current_user.id %}
+      <div class="avatar-sm me-2 flex-shrink-0">{{ other.username[0].upper() }}</div>
+      {% endif %}
+      <div class="msg-bubble {% if msg.sender_id == current_user.id %}msg-sent{% else %}msg-received{% endif %}"
+           style="max-width:70%;">
+        <div style="white-space:pre-wrap;">{{ msg.content }}</div>
+        <small class="d-block mt-1 {% if msg.sender_id == current_user.id %}text-end{% endif %}" style="opacity:0.7;font-size:0.7rem;">
+          {{ msg.created_at.strftime('%m-%d %H:%M') }}
+        </small>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="text-center text-muted py-4">
+      <i class="bi bi-chat-dots display-5"></i>
+      <p class="mt-2">还没有消息，来打个招呼吧！</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- 发送表单 -->
+<div class="card shadow-sm border-0">
+  <div class="card-body p-3">
+    <form method="post">
+      {{ form.hidden_tag() }}
+      <div class="d-flex gap-2">
+        {{ form.content(class='form-control', rows=2, placeholder='写点什么...', style='resize:none;') }}
+        <button type="submit" class="btn btn-primary px-3 rounded-pill align-self-end">
+          <i class="bi bi-send-fill"></i>
+        </button>
+      </div>
+      {% for err in form.content.errors %}
+      <div class="text-danger small mt-1">{{ err }}</div>
+      {% endfor %}
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// 自动滚动到底部
+const container = document.getElementById('msgContainer');
+if (container) container.scrollTop = container.scrollHeight;
+</script>
+{% endblock %}

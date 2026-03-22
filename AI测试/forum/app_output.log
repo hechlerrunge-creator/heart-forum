@@ -1,0 +1,1377 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\models.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\migrate_db.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+127.0.0.1 - - [21/Mar/2026 14:14:48] "GET /admin HTTP/1.1" 302 -
+d:\AI≤‚ ‘\forum\app.py:139: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  return dict(categories=categories, now=datetime.utcnow(), unread_count=unread_count,
+127.0.0.1 - - [21/Mar/2026 14:14:48] "GET /login?next=/admin HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:14:48] "GET /login?next=/admin HTTP/1.1" 500 -
+127.0.0.1 - - [21/Mar/2026 14:14:48] "GET /login?next=/admin HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /admin HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?next=/admin HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:14:49] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /admin/banned-words HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /admin/banned-words HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?next=/admin/banned-words HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?next=/admin/banned-words HTTP/1.1" 500 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?next=/admin/banned-words HTTP/1.1" 500 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?next=/admin/banned-words HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:14:59] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:24:18] "GET /login?next=/admin HTTP/1.1" 500 -
+127.0.0.1 - - [21/Mar/2026 14:24:18] "GET /login?next=/admin HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:24:18] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:24:18] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:24:18] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:24:58] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 158, in index
+    pinned_posts = Post.query.filter_by(is_pinned=True).order_by(Post.created_at.desc()).all()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE posts.is_pinned = 1 ORDER BY posts.created_at DESC]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:24:58] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:24:58] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:24:58] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:24:58] "GET / HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 158, in index
+    pinned_posts = Post.query.filter_by(is_pinned=True).order_by(Post.created_at.desc()).all()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2704, in all
+    return self._iter().all()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE posts.is_pinned = 1 ORDER BY posts.created_at DESC]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:24:58] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:24:58] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:24:58] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /admin HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /admin HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?next=/admin HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?next=/admin HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?next=/admin HTTP/1.1" 500 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?next=/admin HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:03] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:25:29] "GET /login?next=/admin HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: posts.is_anonymous
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1498, in __call__
+    return self.wsgi_app(environ, start_response)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1476, in wsgi_app
+    response = self.handle_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "d:\AI≤‚ ‘\forum\app.py", line 333, in login
+    return render_template('login.html', form=form)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "d:\AI≤‚ ‘\forum\templates\login.html", line 1, in top-level template code
+    {% extends 'base.html' %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 108, in top-level template code
+    {% block sidebar %}
+  File "d:\AI≤‚ ‘\forum\templates\base.html", line 123, in block 'sidebar'
+    <span class="badge bg-secondary ms-auto">{{ cat.posts.count() }}</span>
+    ^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\dynamic.py", line 199, in count
+    return self._generate(sess).count()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 3146, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2835, in scalar
+    ret = self.one()
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2808, in one
+    return self._iter().one()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\query.py", line 2857, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+    
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python314\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: posts.is_anonymous
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT posts.id AS posts_id, posts.title AS posts_title, posts.content AS posts_content, posts.user_id AS posts_user_id, posts.category_id AS posts_category_id, posts.is_anonymous AS posts_is_anonymous, posts.is_pinned AS posts_is_pinned, posts.is_locked AS posts_is_locked, posts.views AS posts_views, posts.created_at AS posts_created_at, posts.updated_at AS posts_updated_at 
+FROM posts 
+WHERE ? = posts.category_id) AS anon_1]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+127.0.0.1 - - [21/Mar/2026 14:25:29] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:25:29] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:25:29] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:25:29] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\test_app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\test_app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\app.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+d:\AI≤‚ ‘\forum\app.py:140: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  return dict(categories=categories, now=datetime.utcnow(), unread_count=unread_count,
+127.0.0.1 - - [21/Mar/2026 14:37:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:37:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:37:38] "GET /static/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:37:38] "GET /static/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:37:39] "GET /static/js/main.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:37:39] "GET /static/js/main.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:38:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:38:11] "GET /static/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:38:11] "GET /static/js/main.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:38:13] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [21/Mar/2026 14:38:18] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:38:18] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:38:18] "GET /static/js/main.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:38:18] "GET /captcha HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:51:10] "GET /register HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 14:51:10] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:51:10] "GET /static/js/main.js HTTP/1.1" 304 -
+127.0.0.1 - - [21/Mar/2026 14:51:10] "GET /captcha HTTP/1.1" 200 -
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\run_git.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\run_git.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\run_git.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\run_git.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\check_token.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\run_git.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\check_token.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\run_git.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
+ * Detected change in 'd:\\AI≤‚ ‘\\forum\\run_git.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 101-788-916
