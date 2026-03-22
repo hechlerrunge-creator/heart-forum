@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}管理后台{% endblock %} - 心语论坛 Admin</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .admin-sidebar { min-height: calc(100vh - 56px); background: #1e2a3a; }
+    .admin-sidebar .nav-link { color: #adb5bd; padding: .6rem 1.2rem; border-radius: 6px; margin: 2px 8px; }
+    .admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active { background: #2d3f55; color: #fff; }
+    .admin-sidebar .nav-link i { width: 20px; }
+    .admin-sidebar .sidebar-brand { color: #fff; font-weight: 700; font-size: 1.1rem; padding: 1rem 1.2rem; }
+    .admin-main { background: #f4f6f9; min-height: calc(100vh - 56px); }
+    .badge-count { font-size: 0.65rem; }
+  </style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<nav class="navbar navbar-dark px-4 py-0" style="height:56px;background: linear-gradient(135deg, #1e2a3a, #2d3f55);">
+  <span class="navbar-brand mb-0 fw-bold"><i class="bi bi-shield-check me-2 text-warning"></i>心语论坛 管理后台</span>
+  <div class="d-flex align-items-center gap-3">
+    <a href="{{ url_for('index') }}" class="text-white-50 text-decoration-none small">
+      <i class="bi bi-arrow-left me-1"></i>返回前台
+    </a>
+    <span class="text-white-50">|</span>
+    <span class="text-white-50 small"><i class="bi bi-person me-1"></i>{{ current_user.username }}</span>
+    <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-danger">退出</a>
+  </div>
+</nav>
+
+<div class="d-flex">
+  <!-- 侧边栏 -->
+  <div class="admin-sidebar" style="width:220px; flex-shrink:0">
+    <div class="sidebar-brand"><i class="bi bi-speedometer2 me-2"></i>控制台</div>
+    <nav class="nav flex-column pb-4">
+      <a href="{{ url_for('admin_dashboard') }}" class="nav-link {% if request.endpoint == 'admin_dashboard' %}active{% endif %}">
+        <i class="bi bi-grid me-2"></i>数据概览
+      </a>
+      <a href="{{ url_for('admin_users') }}" class="nav-link {% if request.endpoint in ['admin_users','toggle_ban','toggle_admin'] %}active{% endif %}">
+        <i class="bi bi-people me-2"></i>用户管理
+      </a>
+      <a href="{{ url_for('admin_posts') }}" class="nav-link {% if request.endpoint in ['admin_posts','toggle_pin','toggle_lock'] %}active{% endif %}">
+        <i class="bi bi-file-earmark-text me-2"></i>帖子管理
+      </a>
+      <a href="{{ url_for('admin_categories') }}" class="nav-link {% if request.endpoint in ['admin_categories','add_category','delete_category'] %}active{% endif %}">
+        <i class="bi bi-tags me-2"></i>分类管理
+      </a>
+      <hr style="border-color:#2d3f55;margin:8px 16px;">
+      <a href="{{ url_for('admin_banned_words') }}" class="nav-link {% if 'banned' in request.endpoint %}active{% endif %}">
+        <i class="bi bi-slash-circle me-2"></i>违禁词管理
+      </a>
+      <a href="{{ url_for('admin_reports') }}" class="nav-link {% if 'report' in request.endpoint %}active{% endif %}">
+        <i class="bi bi-flag me-2"></i>举报处理
+        {% if report_count is defined and report_count > 0 %}
+        <span class="badge bg-danger badge-count ms-1">{{ report_count }}</span>
+        {% endif %}
+      </a>
+      <a href="{{ url_for('admin_content_review') }}" class="nav-link {% if 'content_review' in request.endpoint or 'approve_content' in request.endpoint or 'reject_content' in request.endpoint %}active{% endif %}">
+        <i class="bi bi-shield-check me-2"></i>内容审核
+        {% if review_pending_count is defined and review_pending_count > 0 %}
+        <span class="badge bg-warning text-dark badge-count ms-1">{{ review_pending_count }}</span>
+        {% endif %}
+      </a>
+    </nav>
+  </div>
+
+  <!-- 主内容 -->
+  <div class="admin-main flex-grow-1 p-4">
+    <!-- Flash 消息 -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

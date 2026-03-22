@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}账号设置{% endblock %}
+
+{% block content %}
+<h5 class="fw-bold mb-4"><i class="bi bi-gear me-2"></i>账号设置</h5>
+
+<div class="row g-4">
+  <!-- 修改资料 -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header fw-bold"><i class="bi bi-person-badge me-2"></i>个人资料</div>
+      <div class="card-body">
+        <form method="post">
+          {{ profile_form.hidden_tag() }}
+          <div class="mb-3">
+            <label class="form-label">用户名</label>
+            <input class="form-control" value="{{ current_user.username }}" disabled>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ profile_form.bio.label.text }}</label>
+            {{ profile_form.bio(class="form-control", rows=3, placeholder="介绍一下自己...") }}
+          </div>
+          <button type="submit" name="save_profile" class="btn btn-primary">
+            <i class="bi bi-check2 me-2"></i>保存资料
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 修改密码 -->
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-header fw-bold"><i class="bi bi-shield-lock me-2"></i>修改密码</div>
+      <div class="card-body">
+        <form method="post">
+          {{ pwd_form.hidden_tag() }}
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ pwd_form.old_password.label.text }}</label>
+            {{ pwd_form.old_password(class="form-control" + (" is-invalid" if pwd_form.old_password.errors else "")) }}
+            {% for err in pwd_form.old_password.errors %}<div class="invalid-feedback">{{ err }}</div>{% endfor %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ pwd_form.new_password.label.text }}</label>
+            {{ pwd_form.new_password(class="form-control" + (" is-invalid" if pwd_form.new_password.errors else ""), placeholder="至少 6 位") }}
+            {% for err in pwd_form.new_password.errors %}<div class="invalid-feedback">{{ err }}</div>{% endfor %}
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">{{ pwd_form.confirm.label.text }}</label>
+            {{ pwd_form.confirm(class="form-control" + (" is-invalid" if pwd_form.confirm.errors else "")) }}
+            {% for err in pwd_form.confirm.errors %}<div class="invalid-feedback">{{ err }}</div>{% endfor %}
+          </div>
+          <button type="submit" name="change_password" class="btn btn-warning">
+            <i class="bi bi-key me-2"></i>修改密码
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

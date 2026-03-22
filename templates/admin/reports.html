@@ -1,0 +1,345 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}举报处理{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="fw-bold mb-0"><i class="bi bi-flag me-2 text-warning"></i>举报处理</h4>
+  <div class="text-muted small">
+    <i class="bi bi-clock me-1"></i>最近更新：{{ now.strftime('%H:%M') }}
+  </div>
+</div>
+
+<!-- 统计卡片 -->
+<div class="row g-3 mb-4">
+  <div class="col-sm-4">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body d-flex align-items-center py-3">
+        <div class="rounded-circle bg-warning bg-opacity-15 p-2 me-3">
+          <i class="bi bi-hourglass-split text-warning fs-5"></i>
+        </div>
+        <div>
+          <div class="fs-4 fw-bold text-warning">{{ stats.pending }}</div>
+          <div class="text-muted small">待处理</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body d-flex align-items-center py-3">
+        <div class="rounded-circle bg-success bg-opacity-15 p-2 me-3">
+          <i class="bi bi-check-circle text-success fs-5"></i>
+        </div>
+        <div>
+          <div class="fs-4 fw-bold text-success">{{ stats.handled }}</div>
+          <div class="text-muted small">已处理</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body d-flex align-items-center py-3">
+        <div class="rounded-circle bg-secondary bg-opacity-15 p-2 me-3">
+          <i class="bi bi-flag text-secondary fs-5"></i>
+        </div>
+        <div>
+          <div class="fs-4 fw-bold text-secondary">{{ stats.total }}</div>
+          <div class="text-muted small">累计举报</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 筛选工具栏 -->
+<div class="card border-0 shadow-sm mb-3">
+  <div class="card-body py-2">
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+      <span class="text-muted small me-1">状态：</span>
+      <a href="{{ url_for('admin_reports', status='pending', type=rtype) }}"
+         class="btn btn-sm {% if status == 'pending' %}btn-warning{% else %}btn-outline-secondary{% endif %}">
+        <i class="bi bi-hourglass-split me-1"></i>待处理
+        {% if stats.pending > 0 %}<span class="badge bg-light text-warning ms-1">{{ stats.pending }}</span>{% endif %}
+      </a>
+      <a href="{{ url_for('admin_reports', status='handled', type=rtype) }}"
+         class="btn btn-sm {% if status == 'handled' %}btn-success{% else %}btn-outline-secondary{% endif %}">
+        <i class="bi bi-check-circle me-1"></i>已处理
+      </a>
+      <a href="{{ url_for('admin_reports', status='all', type=rtype) }}"
+         class="btn btn-sm {% if status == 'all' %}btn-primary{% else %}btn-outline-secondary{% endif %}">
+        全部
+      </a>
+      <span class="text-muted small ms-3 me-1">类型：</span>
+      <a href="{{ url_for('admin_reports', status=status, type='all') }}"
+         class="btn btn-sm {% if rtype == 'all' %}btn-dark{% else %}btn-outline-secondary{% endif %}">全部类型</a>
+      <a href="{{ url_for('admin_reports', status=status, type='post') }}"
+         class="btn btn-sm {% if rtype == 'post' %}btn-primary{% else %}btn-outline-secondary{% endif %}">帖子</a>
+      <a href="{{ url_for('admin_reports', status=status, type='reply') }}"
+         class="btn btn-sm {% if rtype == 'reply' %}btn-info{% else %}btn-outline-secondary{% endif %}">回复</a>
+    </div>
+  </div>
+</div>
+
+{% if reports.items %}
+<form id="batchForm" action="{{ url_for('batch_handle_reports') }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+  <!-- 批量操作工具栏 -->
+  {% if status == 'pending' or status == 'all' %}
+  <div class="d-flex align-items-center gap-2 mb-2 bg-light rounded p-2" id="batchBar" style="display:none!important">
+    <div class="form-check mb-0 me-2">
+      <input class="form-check-input" type="checkbox" id="selectAll" onchange="toggleAll(this)">
+      <label class="form-check-label small" for="selectAll">全选</label>
+    </div>
+    <span class="text-muted small" id="selectedCount">已选 0 条</span>
+    <div class="ms-auto d-flex gap-2">
+      <button type="submit" name="action" value="dismiss" class="btn btn-sm btn-outline-secondary"
+              onclick="return confirmBatch('忽略')">
+        <i class="bi bi-x-circle me-1"></i>批量忽略
+      </button>
+      <button type="submit" name="action" value="delete_content" class="btn btn-sm btn-outline-danger"
+              onclick="return confirmBatch('删除内容')">
+        <i class="bi bi-trash me-1"></i>批量删除内容
+      </button>
+    </div>
+  </div>
+  {% endif %}
+
+<div class="card border-0 shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          {% if status == 'pending' or status == 'all' %}
+          <th width="36"><input type="checkbox" id="selectAllTop" class="form-check-input" onchange="toggleAll(this)"></th>
+          {% endif %}
+          <th width="48">#</th>
+          <th width="70">类型</th>
+          <th>被举报内容</th>
+          <th width="100">举报原因</th>
+          <th width="90">举报人</th>
+          <th width="90">时间</th>
+          <th width="130">状态/操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for report in reports.items %}
+      <tr {% if report.is_handled %}class="text-muted opacity-75"{% endif %} id="row-{{ report.id }}">
+        {% if status == 'pending' or status == 'all' %}
+        <td>
+          {% if not report.is_handled %}
+          <input type="checkbox" name="report_ids" value="{{ report.id }}" class="form-check-input row-check"
+                 onchange="updateCount()">
+          {% endif %}
+        </td>
+        {% endif %}
+        <td class="small text-muted">{{ report.id }}</td>
+        <td>
+          {% if report.post_id %}
+          <span class="badge bg-primary">帖子</span>
+          {% elif report.reply_id %}
+          <span class="badge bg-info text-dark">回复</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if report.post_id and report.post %}
+          <a href="{{ url_for('post_detail', post_id=report.post_id) }}" class="text-decoration-none fw-semibold small text-dark text-truncate d-block"
+             style="max-width:220px" target="_blank" title="{{ report.post.title }}">
+            <i class="bi bi-box-arrow-up-right me-1 text-muted" style="font-size:.7rem"></i>
+            {{ report.post.title[:40] }}{% if report.post.title|length > 40 %}…{% endif %}
+          </a>
+          <small class="text-muted">
+            作者：{{ report.post.author.username }}
+            {% if report.post.is_anonymous %}<span class="badge bg-light text-dark border ms-1" style="font-size:.6rem">匿名</span>{% endif %}
+          </small>
+          {% elif report.reply_id and report.reported_reply %}
+          <span class="small text-truncate d-block" style="max-width:220px" title="{{ report.reported_reply.content }}">
+            {{ report.reported_reply.content[:50] }}{% if report.reported_reply.content|length > 50 %}…{% endif %}
+          </span>
+          <small class="text-muted">作者：{{ report.reported_reply.author.username }}</small>
+          {% else %}
+          <span class="text-muted small"><i class="bi bi-trash me-1"></i>内容已删除</span>
+          {% endif %}
+        </td>
+        <td>
+          <span class="badge bg-warning text-dark">{{ report.reason }}</span>
+        </td>
+        <td class="small">
+          <a href="{{ url_for('user_profile', user_id=report.reporter.id) }}" class="text-decoration-none text-dark"
+             target="_blank">{{ report.reporter.username }}</a>
+        </td>
+        <td class="small text-muted">{{ report.created_at.strftime('%m-%d %H:%M') }}</td>
+        <td>
+          {% if not report.is_handled %}
+          <!-- 处理按钮 -->
+          <button type="button" class="btn btn-sm btn-warning"
+                  data-bs-toggle="modal" data-bs-target="#handleModal"
+                  data-report-id="{{ report.id }}"
+                  data-has-post="{{ '1' if report.post_id and report.post else '0' }}"
+                  data-has-reply="{{ '1' if report.reply_id and report.reported_reply else '0' }}">
+            <i class="bi bi-tools me-1"></i>处理
+          </button>
+          {% else %}
+          <div>
+            <span class="badge bg-success"><i class="bi bi-check me-1"></i>已处理</span>
+            {% if report.handle_note %}
+            <div class="small text-muted mt-1" title="{{ report.handle_note }}">
+              <i class="bi bi-chat-square-text me-1"></i>{{ report.handle_note[:20] }}{% if report.handle_note|length > 20 %}…{% endif %}
+            </div>
+            {% endif %}
+            {% if report.handler %}
+            <div class="small text-muted">by {{ report.handler.username }}</div>
+            {% endif %}
+          </div>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</form>
+
+<!-- 分页 -->
+{% if reports.pages > 1 %}
+<nav class="mt-4">
+  <ul class="pagination justify-content-center">
+    {% for p in reports.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+      {% if p %}
+        <li class="page-item {% if p == reports.page %}active{% endif %}">
+          <a class="page-link" href="{{ url_for('admin_reports', page=p, status=status, type=rtype) }}">{{ p }}</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled"><span class="page-link">…</span></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
+{% else %}
+<div class="text-center py-5 text-muted">
+  <i class="bi bi-check-circle-fill display-4 text-success"></i>
+  <p class="mt-3 fs-5">
+    {% if status == 'pending' %}没有待处理的举报，太棒了！{% else %}暂无举报记录{% endif %}
+  </p>
+</div>
+{% endif %}
+
+
+<!-- 处理举报 Modal -->
+<div class="modal fade" id="handleModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" method="post" id="handleForm">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" id="handleAction" value="dismiss">
+        <input type="hidden" name="back_status" value="{{ status }}">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-tools me-2"></i>处理举报</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">处理方式</label>
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-outline-secondary text-start action-btn"
+                      data-action="dismiss" onclick="setAction('dismiss', this)">
+                <i class="bi bi-x-circle me-2"></i><strong>忽略举报</strong>
+                <div class="text-muted small">标记为已处理，内容保留</div>
+              </button>
+              <button type="button" class="btn btn-outline-danger text-start action-btn" id="deletePostBtn"
+                      data-action="delete_post" onclick="setAction('delete_post', this)">
+                <i class="bi bi-trash me-2"></i><strong>删除帖子</strong>
+                <div class="text-muted small">删除被举报的帖子</div>
+              </button>
+              <button type="button" class="btn btn-outline-danger text-start action-btn" id="deleteReplyBtn"
+                      data-action="delete_reply" onclick="setAction('delete_reply', this)">
+                <i class="bi bi-trash me-2"></i><strong>删除回复</strong>
+                <div class="text-muted small">删除被举报的回复</div>
+              </button>
+              <button type="button" class="btn btn-outline-danger text-start action-btn"
+                      data-action="ban_user" onclick="setAction('ban_user', this)">
+                <i class="bi bi-person-x me-2"></i><strong>封禁发布者</strong>
+                <div class="text-muted small">封禁被举报内容的发布用户</div>
+              </button>
+            </div>
+          </div>
+          <div class="mb-0">
+            <label class="form-label fw-semibold">处理备注 <span class="text-muted fw-normal">(选填)</span></label>
+            <textarea name="note" class="form-control" rows="2" placeholder="记录处理原因或备注..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="submit" class="btn btn-warning">
+            <i class="bi bi-check2 me-1"></i>确认处理
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// 初始化处理Modal
+document.getElementById('handleModal').addEventListener('show.bs.modal', function(event) {
+  const btn = event.relatedTarget;
+  const reportId = btn.getAttribute('data-report-id');
+  const hasPost = btn.getAttribute('data-has-post') === '1';
+  const hasReply = btn.getAttribute('data-has-reply') === '1';
+
+  // 设置 form action
+  document.getElementById('handleForm').action = '/admin/report/' + reportId + '/handle';
+
+  // 默认选中"忽略"
+  setAction('dismiss', document.querySelector('[data-action="dismiss"]'));
+
+  // 显示/隐藏相关按钮
+  document.getElementById('deletePostBtn').style.display = hasPost ? '' : 'none';
+  document.getElementById('deleteReplyBtn').style.display = hasReply ? '' : 'none';
+
+  // 清空备注
+  document.querySelector('textarea[name="note"]').value = '';
+});
+
+function setAction(action, el) {
+  document.getElementById('handleAction').value = action;
+  // 高亮选中项
+  document.querySelectorAll('.action-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// 批量选择
+function toggleAll(cb) {
+  document.querySelectorAll('.row-check').forEach(c => c.checked = cb.checked);
+  // 同步两个全选框
+  document.querySelectorAll('#selectAll,#selectAllTop').forEach(c => c.checked = cb.checked);
+  updateCount();
+}
+
+function updateCount() {
+  const checked = document.querySelectorAll('.row-check:checked').length;
+  const countEl = document.getElementById('selectedCount');
+  if (countEl) countEl.textContent = '已选 ' + checked + ' 条';
+  const batchBar = document.getElementById('batchBar');
+  if (batchBar) batchBar.style.display = checked > 0 ? 'flex' : 'none';
+}
+
+function confirmBatch(action) {
+  const checked = document.querySelectorAll('.row-check:checked').length;
+  if (checked === 0) {
+    alert('请先选择要处理的举报');
+    return false;
+  }
+  return confirm(`确认${action}已选的 ${checked} 条举报？`);
+}
+
+// 初始化时显示批量栏
+document.addEventListener('DOMContentLoaded', updateCount);
+</script>
+{% endblock %}

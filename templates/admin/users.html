@@ -1,0 +1,91 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}用户管理{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="fw-bold mb-0"><i class="bi bi-people me-2"></i>用户管理</h4>
+  <form class="d-flex gap-2" method="get">
+    <input class="form-control form-control-sm" name="q" placeholder="搜索用户名..." value="{{ q }}">
+    <button class="btn btn-sm btn-primary" type="submit">搜索</button>
+  </form>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th><th>用户名</th><th>角色</th><th>状态</th>
+          <th>注册时间</th><th>帖子数</th><th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for user in users.items %}
+      <tr>
+        <td class="text-muted small">{{ user.id }}</td>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="avatar-sm me-2">{{ user.username[0].upper() }}</div>
+            <a href="{{ url_for('user_profile', user_id=user.id) }}" class="text-decoration-none text-dark fw-semibold">
+              {{ user.username }}
+            </a>
+          </div>
+        </td>
+        <td>
+          {% if user.is_admin %}
+          <span class="badge bg-danger">管理员</span>
+          {% else %}
+          <span class="badge bg-secondary">普通用户</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if user.is_banned %}
+          <span class="badge bg-dark">已封禁</span>
+          {% else %}
+          <span class="badge bg-success">正常</span>
+          {% endif %}
+        </td>
+        <td class="small text-muted">{{ user.created_at.strftime('%Y-%m-%d') }}</td>
+        <td class="text-muted">{{ user.posts.count() }}</td>
+        <td>
+          <div class="btn-group btn-group-sm">
+            {% if user.id != current_user.id %}
+            <form action="{{ url_for('toggle_ban', user_id=user.id) }}" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn {% if user.is_banned %}btn-success{% else %}btn-outline-danger{% endif %}" type="submit">
+                {% if user.is_banned %}解封{% else %}封禁{% endif %}
+              </button>
+            </form>
+            <form action="{{ url_for('toggle_admin', user_id=user.id) }}" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn {% if user.is_admin %}btn-outline-secondary{% else %}btn-outline-warning{% endif %}" type="submit">
+                {% if user.is_admin %}降级{% else %}提权{% endif %}
+              </button>
+            </form>
+            {% else %}
+            <span class="text-muted small">（自身）</span>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页 -->
+{% if users.pages > 1 %}
+<nav class="mt-4">
+  <ul class="pagination justify-content-center">
+    {% for p in users.iter_pages() %}
+      {% if p %}
+        <li class="page-item {% if p == users.page %}active{% endif %}">
+          <a class="page-link" href="{{ url_for('admin_users', page=p, q=q) }}">{{ p }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+{% endblock %}

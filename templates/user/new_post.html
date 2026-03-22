@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}{% if edit %}编辑帖子{% else %}发新帖子{% endif %}{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+  <div class="card-header fw-bold border-0" style="background:#f8f6ff;">
+    <i class="bi bi-pencil-square me-2"></i>{% if edit %}编辑帖子{% else %}发表新帖{% endif %}
+  </div>
+  <div class="card-body p-4">
+    <form method="post">
+      {{ form.hidden_tag() }}
+
+      <div class="mb-3">
+        {{ form.category_id.label(class='form-label fw-bold') }}
+        {{ form.category_id(class='form-select') }}
+      </div>
+
+      <div class="mb-3">
+        {{ form.title.label(class='form-label fw-bold') }}
+        {{ form.title(class='form-control', placeholder='一个简洁的标题，让大家知道你想聊什么') }}
+        {% for err in form.title.errors %}
+        <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{ err }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        {{ form.content.label(class='form-label fw-bold') }}
+        {{ form.content(class='form-control', rows=12, placeholder='说出你想说的，这里的人们会倾听你的故事...') }}
+        {% for err in form.content.errors %}
+        <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{ err }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- 匿名选项 -->
+      <div class="mb-4 p-3 rounded" style="background:#f8f6ff;">
+        <div class="form-check">
+          {{ form.is_anonymous(class='form-check-input') }}
+          <label class="form-check-label fw-bold" for="{{ form.is_anonymous.id }}">
+            <i class="bi bi-incognito me-1"></i>匿名发布
+          </label>
+        </div>
+        <small class="text-muted d-block mt-1 ms-4">
+          勾选后，帖子中不会显示你的用户名，其他人看不到你是谁。<br>
+          <strong>注意：</strong>管理员仍可看到发帖者信息。
+        </small>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary rounded-pill px-4">
+          <i class="bi bi-send me-2"></i>{% if edit %}保存修改{% else %}发布帖子{% endif %}
+        </button>
+        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary rounded-pill px-4">取消</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

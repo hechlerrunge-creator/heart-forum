@@ -1,0 +1,341 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}内容审核{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="fw-bold mb-0"><i class="bi bi-shield-check me-2 text-primary"></i>内容审核</h4>
+  <div class="text-muted small">
+    <i class="bi bi-clock me-1"></i>{{ now.strftime('%H:%M') }}
+  </div>
+</div>
+
+<!-- 统计卡片 -->
+<div class="row g-3 mb-4">
+  <div class="col-sm-3">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body d-flex align-items-center py-3">
+        <div class="rounded-circle bg-warning bg-opacity-15 p-2 me-3">
+          <i class="bi bi-hourglass-split text-warning fs-5"></i>
+        </div>
+        <div>
+          <div class="fs-4 fw-bold text-warning">{{ stats.pending }}</div>
+          <div class="text-muted small">待审核</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body d-flex align-items-center py-3">
+        <div class="rounded-circle bg-success bg-opacity-15 p-2 me-3">
+          <i class="bi bi-check-circle text-success fs-5"></i>
+        </div>
+        <div>
+          <div class="fs-4 fw-bold text-success">{{ stats.approved }}</div>
+          <div class="text-muted small">已通过</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body d-flex align-items-center py-3">
+        <div class="rounded-circle bg-danger bg-opacity-15 p-2 me-3">
+          <i class="bi bi-x-circle text-danger fs-5"></i>
+        </div>
+        <div>
+          <div class="fs-4 fw-bold text-danger">{{ stats.rejected }}</div>
+          <div class="text-muted small">已拒绝</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card border-0 shadow-sm h-100">
+      <div class="card-body d-flex align-items-center py-3">
+        <div class="rounded-circle bg-secondary bg-opacity-15 p-2 me-3">
+          <i class="bi bi-layers text-secondary fs-5"></i>
+        </div>
+        <div>
+          <div class="fs-4 fw-bold text-secondary">{{ stats.total }}</div>
+          <div class="text-muted small">累计任务</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 筛选工具栏 -->
+<div class="card border-0 shadow-sm mb-3">
+  <div class="card-body py-2">
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+      <span class="text-muted small me-1">状态：</span>
+      <a href="{{ url_for('admin_content_review', status='pending', trigger=trigger) }}"
+         class="btn btn-sm {% if status == 'pending' %}btn-warning{% else %}btn-outline-secondary{% endif %}">
+        <i class="bi bi-hourglass-split me-1"></i>待审核
+        {% if stats.pending > 0 %}<span class="badge bg-light text-warning ms-1">{{ stats.pending }}</span>{% endif %}
+      </a>
+      <a href="{{ url_for('admin_content_review', status='approved', trigger=trigger) }}"
+         class="btn btn-sm {% if status == 'approved' %}btn-success{% else %}btn-outline-secondary{% endif %}">
+        <i class="bi bi-check-circle me-1"></i>已通过
+      </a>
+      <a href="{{ url_for('admin_content_review', status='rejected', trigger=trigger) }}"
+         class="btn btn-sm {% if status == 'rejected' %}btn-danger{% else %}btn-outline-secondary{% endif %}">
+        <i class="bi bi-x-circle me-1"></i>已拒绝
+      </a>
+      <a href="{{ url_for('admin_content_review', status='all', trigger=trigger) }}"
+         class="btn btn-sm {% if status == 'all' %}btn-primary{% else %}btn-outline-secondary{% endif %}">全部</a>
+
+      <span class="text-muted small ms-3 me-1">来源：</span>
+      <a href="{{ url_for('admin_content_review', status=status, trigger='all') }}"
+         class="btn btn-sm {% if trigger == 'all' %}btn-dark{% else %}btn-outline-secondary{% endif %}">全部</a>
+      <a href="{{ url_for('admin_content_review', status=status, trigger='report') }}"
+         class="btn btn-sm {% if trigger == 'report' %}btn-warning text-dark{% else %}btn-outline-secondary{% endif %}">
+        <i class="bi bi-flag me-1"></i>举报触发
+      </a>
+      <a href="{{ url_for('admin_content_review', status=status, trigger='keyword') }}"
+         class="btn btn-sm {% if trigger == 'keyword' %}btn-danger{% else %}btn-outline-secondary{% endif %}">
+        <i class="bi bi-slash-circle me-1"></i>关键词触发
+      </a>
+      <a href="{{ url_for('admin_content_review', status=status, trigger='manual') }}"
+         class="btn btn-sm {% if trigger == 'manual' %}btn-info text-dark{% else %}btn-outline-secondary{% endif %}">
+        <i class="bi bi-hand-index me-1"></i>手动添加
+      </a>
+    </div>
+  </div>
+</div>
+
+{% if reviews.items %}
+<div class="card border-0 shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th width="48">#</th>
+          <th width="70">类型</th>
+          <th>内容摘要</th>
+          <th width="90">作者</th>
+          <th width="90">来源</th>
+          <th width="90">进入时间</th>
+          <th width="90">状态</th>
+          <th width="130">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for review in reviews.items %}
+      <tr {% if review.status != 'pending' %}class="opacity-75"{% endif %}>
+        <td class="small text-muted">{{ review.id }}</td>
+        <td>
+          {% if review.post_id %}
+          <span class="badge bg-primary">帖子</span>
+          {% elif review.reply_id %}
+          <span class="badge bg-info text-dark">回复</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if review.post_id and review.post %}
+          <a href="{{ url_for('post_detail', post_id=review.post_id) }}" class="text-decoration-none fw-semibold small text-dark text-truncate d-block"
+             style="max-width:260px" target="_blank" title="{{ review.post.title }}">
+            <i class="bi bi-box-arrow-up-right me-1 text-muted" style="font-size:.7rem"></i>
+            {{ review.post.title[:50] }}{% if review.post.title|length > 50 %}…{% endif %}
+          </a>
+          <small class="text-muted d-block">{{ review.post.content[:80] }}{% if review.post.content|length > 80 %}…{% endif %}</small>
+          {% elif review.reply_id and review.reply %}
+          <span class="small text-truncate d-block" style="max-width:260px" title="{{ review.reply.content }}">
+            {{ review.reply.content[:100] }}{% if review.reply.content|length > 100 %}…{% endif %}
+          </span>
+          <small class="text-muted">来自帖子：
+            {% if review.reply.post %}
+            <a href="{{ url_for('post_detail', post_id=review.reply.post_id) }}" class="text-muted" target="_blank">
+              {{ review.reply.post.title[:30] }}
+            </a>
+            {% endif %}
+          </small>
+          {% else %}
+          <span class="text-muted small"><i class="bi bi-trash me-1"></i>内容已删除</span>
+          {% endif %}
+        </td>
+        <td class="small">
+          {% if review.post_id and review.post %}
+          {{ review.post.author.username }}
+          {% elif review.reply_id and review.reply %}
+          {{ review.reply.author.username }}
+          {% else %}
+          <span class="text-muted">—</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if review.trigger == 'report' %}
+          <span class="badge bg-warning text-dark"><i class="bi bi-flag me-1"></i>举报</span>
+          {% elif review.trigger == 'keyword' %}
+          <span class="badge bg-danger"><i class="bi bi-slash-circle me-1"></i>关键词</span>
+          {% elif review.trigger == 'manual' %}
+          <span class="badge bg-info text-dark"><i class="bi bi-hand-index me-1"></i>手动</span>
+          {% else %}
+          <span class="badge bg-secondary">{{ review.trigger }}</span>
+          {% endif %}
+        </td>
+        <td class="small text-muted">{{ review.created_at.strftime('%m-%d %H:%M') }}</td>
+        <td>
+          {% if review.status == 'pending' %}
+          <span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>待审核</span>
+          {% elif review.status == 'approved' %}
+          <span class="badge bg-success"><i class="bi bi-check me-1"></i>已通过</span>
+          {% elif review.status == 'rejected' %}
+          <span class="badge bg-danger"><i class="bi bi-x me-1"></i>已拒绝</span>
+          {% endif %}
+          {% if review.reviewed_at %}
+          <div class="text-muted" style="font-size:.65rem;">{{ review.reviewed_at.strftime('%m-%d %H:%M') }}</div>
+          {% endif %}
+        </td>
+        <td>
+          {% if review.status == 'pending' %}
+          <div class="d-flex gap-1">
+            <button type="button" class="btn btn-sm btn-success"
+                    data-bs-toggle="modal" data-bs-target="#reviewModal"
+                    data-review-id="{{ review.id }}"
+                    data-action="approve"
+                    title="通过审核">
+              <i class="bi bi-check-lg"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-danger"
+                    data-bs-toggle="modal" data-bs-target="#reviewModal"
+                    data-review-id="{{ review.id }}"
+                    data-action="reject"
+                    title="拒绝审核">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          {% else %}
+          <div>
+            {% if review.review_note %}
+            <span class="text-muted small" title="{{ review.review_note }}">
+              <i class="bi bi-chat-square-text me-1"></i>{{ review.review_note[:20] }}{% if review.review_note|length > 20 %}…{% endif %}
+            </span>
+            {% endif %}
+            {% if review.reviewer %}
+            <div class="small text-muted">by {{ review.reviewer.username }}</div>
+            {% endif %}
+          </div>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页 -->
+{% if reviews.pages > 1 %}
+<nav class="mt-4">
+  <ul class="pagination justify-content-center">
+    {% for p in reviews.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+      {% if p %}
+        <li class="page-item {% if p == reviews.page %}active{% endif %}">
+          <a class="page-link" href="{{ url_for('admin_content_review', page=p, status=status, trigger=trigger) }}">{{ p }}</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled"><span class="page-link">…</span></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
+
+{% else %}
+<div class="text-center py-5 text-muted">
+  <i class="bi bi-shield-check display-4 text-success"></i>
+  <p class="mt-3 fs-5">
+    {% if status == 'pending' %}暂无待审核内容{% else %}暂无审核记录{% endif %}
+  </p>
+  <p class="small">可从帖子管理或回复中手动将内容加入审核队列</p>
+  <a href="{{ url_for('admin_posts') }}" class="btn btn-outline-primary btn-sm">
+    <i class="bi bi-file-earmark-text me-1"></i>前往帖子管理
+  </a>
+</div>
+{% endif %}
+
+
+<!-- 审核 Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" method="post" id="reviewForm">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="modal-header" id="reviewModalHeader">
+          <h5 class="modal-title" id="reviewModalTitle"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3" id="rejectOptionsDiv" style="display:none">
+            <label class="form-label fw-semibold">拒绝后的操作</label>
+            <div class="d-grid gap-2">
+              <label class="card p-3 cursor-pointer border-2" style="cursor:pointer" id="hideOption">
+                <div class="d-flex align-items-center">
+                  <input type="radio" name="action" value="hide" class="form-check-input me-2" checked>
+                  <div>
+                    <div class="fw-semibold"><i class="bi bi-eye-slash me-1 text-warning"></i>仅标记拒绝</div>
+                    <div class="text-muted small">内容保留，仅记录审核结果</div>
+                  </div>
+                </div>
+              </label>
+              <label class="card p-3 cursor-pointer border-2" style="cursor:pointer">
+                <div class="d-flex align-items-center">
+                  <input type="radio" name="action" value="delete" class="form-check-input me-2">
+                  <div>
+                    <div class="fw-semibold"><i class="bi bi-trash me-1 text-danger"></i>删除内容</div>
+                    <div class="text-muted small">同时删除被审核的帖子/回复</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="mb-0">
+            <label class="form-label fw-semibold">审核备注 <span class="text-muted fw-normal">(选填)</span></label>
+            <textarea name="note" class="form-control" rows="2" placeholder="记录审核意见..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="submit" class="btn" id="reviewSubmitBtn">确认</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('reviewModal').addEventListener('show.bs.modal', function(event) {
+  const btn = event.relatedTarget;
+  const reviewId = btn.getAttribute('data-review-id');
+  const action = btn.getAttribute('data-action');
+  const form = document.getElementById('reviewForm');
+  const header = document.getElementById('reviewModalHeader');
+  const title = document.getElementById('reviewModalTitle');
+  const rejectDiv = document.getElementById('rejectOptionsDiv');
+  const submitBtn = document.getElementById('reviewSubmitBtn');
+
+  // 清空备注
+  document.querySelector('textarea[name="note"]').value = '';
+
+  if (action === 'approve') {
+    form.action = '/admin/content-review/' + reviewId + '/approve';
+    header.className = 'modal-header bg-success bg-opacity-10';
+    title.innerHTML = '<i class="bi bi-check-circle me-2 text-success"></i>通过审核';
+    rejectDiv.style.display = 'none';
+    submitBtn.className = 'btn btn-success';
+    submitBtn.textContent = '✓ 通过审核';
+  } else {
+    form.action = '/admin/content-review/' + reviewId + '/reject';
+    header.className = 'modal-header bg-danger bg-opacity-10';
+    title.innerHTML = '<i class="bi bi-x-circle me-2 text-danger"></i>拒绝审核';
+    rejectDiv.style.display = 'block';
+    submitBtn.className = 'btn btn-danger';
+    submitBtn.textContent = '✗ 拒绝审核';
+  }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}登录{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5 col-lg-4">
+    <div class="card shadow border-0 mt-4">
+      <div class="card-body p-4">
+        <div class="text-center mb-4">
+          <i class="bi bi-box-arrow-in-right display-5" style="color:#667eea;"></i>
+          <h4 class="mt-2 fw-bold">欢迎回来</h4>
+          <p class="text-muted small">登录后开始倾诉你的故事</p>
+        </div>
+
+        <form method="post">
+          {{ form.hidden_tag() }}
+
+          <div class="mb-3">
+            {{ form.username.label(class='form-label fw-bold') }}
+            {{ form.username(class='form-control', placeholder='请输入用户名', autofocus=True) }}
+            {% for err in form.username.errors %}
+            <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            {{ form.password.label(class='form-label fw-bold') }}
+            <div class="input-group">
+              {{ form.password(class='form-control', placeholder='请输入密码', id='loginPwd') }}
+              <button class="btn btn-outline-secondary" type="button" onclick="togglePwd('loginPwd', this)">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            {% for err in form.password.errors %}
+            <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- 验证码 -->
+          <div class="mb-3">
+            {{ form.captcha.label(class='form-label fw-bold') }}
+            <div class="d-flex gap-2 align-items-center">
+              {{ form.captcha(class='form-control', placeholder='输入图中字符', style='width:140px;', autocomplete='off') }}
+              <img src="{{ url_for('captcha') }}" alt="验证码" id="captchaImg"
+                   class="rounded" style="height:40px;cursor:pointer;border:1px solid #dee2e6;"
+                   onclick="refreshCaptcha()" title="点击刷新">
+              <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshCaptcha()">
+                <i class="bi bi-arrow-clockwise"></i>
+              </button>
+            </div>
+            {% for err in form.captcha.errors %}
+            <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{ err }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3 form-check">
+            {{ form.remember(class='form-check-input') }}
+            {{ form.remember.label(class='form-check-label text-muted') }}
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold">
+            <i class="bi bi-box-arrow-in-right me-2"></i>登录
+          </button>
+        </form>
+
+        <hr class="my-3">
+        <div class="text-center text-muted small">
+          还没有账号？<a href="{{ url_for('register') }}" class="text-decoration-none fw-bold">立即注册</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function refreshCaptcha() {
+  document.getElementById('captchaImg').src = '{{ url_for("captcha") }}?t=' + Date.now();
+}
+function togglePwd(inputId, btn) {
+  const input = document.getElementById(inputId);
+  const icon = btn.querySelector('i');
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.className = 'bi bi-eye-slash';
+  } else {
+    input.type = 'password';
+    icon.className = 'bi bi-eye';
+  }
+}
+</script>
+{% endblock %}
